@@ -1,0 +1,173 @@
+# ==============================================================================
+# SEGURIDAD Y SECRETOS (CRÍTICO)
+# ==============================================================================
+# Archivos de entorno y credenciales (evitar fuga de contraseñas, secretos JWT, SMTP)
+*.env
+*.env.*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+backend/.env.*
+
+# Permitir explícitamente las plantillas de configuración segura de ejemplo
+!.env.example
+!backend/.env.example
+
+# Llaves criptográficas, certificados TLS/SSL y secretos de infraestructura
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*.csr
+*.asc
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+secrets/
+credentials.json
+client_secret*.json
+
+# ==============================================================================
+# BASE DE DATOS Y PERSISTENCIA LOCAL
+# ==============================================================================
+# Volúmenes y archivos de datos de MongoDB
+mongo_data/
+data/
+db/
+*.rdb
+*.bson
+*.json.gz
+*.dump
+*.archive
+
+# ==============================================================================
+# PYTHON (BACKEND)
+# ==============================================================================
+# Bytecode compilado y caché
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+bin/
+include/
+lib/
+lib64/
+
+# Paquetes y distribución
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+.nox/
+
+# Linters y análisis estático
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# ==============================================================================
+# NODE.JS / REACT (FRONTEND)
+# ==============================================================================
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Compilación y artefactos de Vite / React
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+dist/
+build/
+.cache/
+
+# Caché de linters
+.eslintcache
+.stylelintcache
+
+# ==============================================================================
+# ARCHIVOS DE REGISTRO (LOGS) Y AUDITORÍA LOCAL
+# ==============================================================================
+*.log
+logs/
+*.log.*
+
+# ==============================================================================
+# EDITORES, IDEs Y SISTEMAS OPERATIVOS
+# ==============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio Code (ignorar configuraciones que puedan contener rutas o tokens)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# JetBrains (PyCharm, WebStorm, etc.)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Editores de texto y temporales
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+*.temp

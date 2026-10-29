@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: bdg_mongodb
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    restart: always
+
+  mongo-init:
+    image: mongo:7.0
+    container_name: bdg_mongo_init
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./mongo-init/rs-init.sh:/rs-init.sh
+    entrypoint: ["/bin/bash", "/rs-init.sh"]
+    restart: "no"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bdg_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/?replicaSet=rs0&directConnection=true
+      - MONGO_DB_NAME=bdg_inventario
+      - JWT_SECRET=super-secret-key-solicitudes-inventario-2026-xyz789
+      - BYPASS_CAPTCHA_DEV=true
+      - SIMULATE_EMAIL=true
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      mongo-init:
+        condition: service_completed_successfully
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bdg_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: always
+
+volumes:
+  mongo_data:
