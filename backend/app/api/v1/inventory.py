@@ -14,7 +14,7 @@ async def get_inventory(
     sort_by: str = Query("nombre", description="Campo a ordenar: codigo, nombre, cantidad"),
     sort_dir: int = Query(1, description="1 para ascendente, -1 para descendente"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
+    size: int = Query(10, ge=1, le=500),
     current_user: CurrentUser = Depends(require_permission("Consultar inventario y productos")),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):

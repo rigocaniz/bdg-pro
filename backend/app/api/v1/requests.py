@@ -31,7 +31,7 @@ async def list_requests(
     fecha_desde: Optional[str] = Query(None, description="Fecha de entrega desde (YYYY-MM-DD)"),
     fecha_hasta: Optional[str] = Query(None, description="Fecha de entrega hasta (YYYY-MM-DD)"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
+    size: int = Query(10, ge=1, le=500),
     current_user: CurrentUser = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):

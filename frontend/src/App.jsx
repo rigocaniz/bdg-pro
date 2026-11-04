@@ -83,7 +83,7 @@ export default function App() {
                 <Route
                   path="/proveedores"
                   element={
-                    <ProtectedRoute requiredRole="Compras">
+                    <ProtectedRoute requiredRole={["Compras", "Administrador"]}>
                       <P10Suppliers />
                     </ProtectedRoute>
                   }

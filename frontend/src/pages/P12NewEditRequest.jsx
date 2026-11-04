@@ -53,10 +53,10 @@ export const P12NewEditRequest = () => {
           const reqRes = await api.get(`/requests/${id}`);
           const data = reqRes.data;
           setProveedorId(data.proveedor_id);
-          setFechaEntrega(data.fecha_entrega);
+          setFechaEntrega(data.fecha_entrega ? data.fecha_entrega.split("T")[0] : "");
           setObservaciones(data.observaciones || '');
           setLineas(
-            data.lineas.map((l) => ({
+            (data.lineas || []).map((l) => ({
               producto_id: l.producto_id,
               codigo: l.codigo,
               nombre: l.nombre,

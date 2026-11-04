@@ -13,7 +13,7 @@ async def get_security_audit(
     email: Optional[str] = Query(None, description="Filtrar por correo"),
     evento: Optional[str] = Query(None, description="Filtrar por evento"),
     page: int = Query(1, ge=1),
-    size: int = Query(15, ge=1, le=100),
+    size: int = Query(15, ge=1, le=500),
     current_user: CurrentUser = Depends(require_role("Administrador")),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):

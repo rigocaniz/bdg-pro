@@ -15,7 +15,7 @@ async def list_users(
     estado: Optional[str] = Query(None, description="Filtro por estado"),
     rol: Optional[str] = Query(None, description="Filtro por rol"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
+    size: int = Query(10, ge=1, le=500),
     current_user: CurrentUser = Depends(require_role("Administrador")),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):

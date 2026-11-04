@@ -6,7 +6,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.core.database import get_database
 from app.core.exceptions import NotFoundException, ConflictException
-from app.api.deps import require_role, CurrentUser
+from app.api.deps import require_role, get_current_user, CurrentUser
 from app.models.supplier import SupplierCreate, SupplierUpdate
 
 router = APIRouter(prefix="/suppliers", tags=["Catálogo de Proveedores"])
@@ -16,8 +16,8 @@ async def list_suppliers(
     q: Optional[str] = Query(None, description="Búsqueda por código, nombre o NIT"),
     activo: Optional[bool] = Query(None, description="Filtro por activo"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
-    current_user: CurrentUser = Depends(require_role("Compras")),
+    size: int = Query(10, ge=1, le=500),
+    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
     filtro = {}
@@ -80,7 +80,7 @@ async def create_supplier(
 @router.get("/{supplier_id}")
 async def get_supplier(
     supplier_id: str,
-    current_user: CurrentUser = Depends(require_role("Compras")),
+    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
     doc = await db.proveedores.find_one({"_id": ObjectId(supplier_id)})

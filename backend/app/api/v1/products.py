@@ -16,7 +16,7 @@ async def list_products(
     q: Optional[str] = Query(None, description="Búsqueda por código o nombre"),
     activo: Optional[bool] = Query(None, description="Filtro por activo"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
+    size: int = Query(10, ge=1, le=500),
     current_user: CurrentUser = Depends(require_permission("Consultar inventario y productos")),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):

@@ -18,7 +18,7 @@ async def get_movements(
     producto_id: Optional[str] = Query(None, description="Filtro por producto"),
     numero_solicitud: Optional[str] = Query(None, description="Filtro por número de solicitud"),
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=100),
+    size: int = Query(10, ge=1, le=500),
     current_user: CurrentUser = Depends(require_permission("Consultar movimientos")),
     db: AsyncIOMotorDatabase = Depends(get_database)
 ):
