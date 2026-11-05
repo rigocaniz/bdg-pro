@@ -5,6 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0',
+    allowedHosts: [
+'serviciosgt.online',
+'www.serviciosgt.online'
+],
     port: 5173,
     proxy: {
       '/api': {
