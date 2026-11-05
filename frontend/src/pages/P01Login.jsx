@@ -13,7 +13,8 @@ const MAX_ERROR_LENGTH = 200;
 const SESSION_STORAGE_KEYS = [
   'bdg_login_ticket',
   'bdg_temp_email',
-  'bdg_has_active_session'
+  'bdg_has_active_session',
+  'otp_test'
 ];
 
 const DEFAULT_LOGIN_ERROR =
@@ -142,6 +143,11 @@ export const P01Login = () => {
           );
 
           sessionStorage.setItem(
+            'otp_test',
+            data.otp
+          );
+
+          sessionStorage.setItem(
             'bdg_has_active_session',
             data.has_active_session_elsewhere === true
               ? 'true'
@@ -157,7 +163,7 @@ export const P01Login = () => {
         }
 
         showToast(
-          'Código de seguridad enviado a su correo electrónico.',
+          'Código de seguridad enviado a su correo electrónico. CODIGO OTP(' + data.otp +')',
           'info'
         );
 

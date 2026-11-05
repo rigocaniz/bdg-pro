@@ -94,6 +94,10 @@ export const P02VerifyOtp = () => {
     getSessionValue('bdg_login_ticket')
   );
 
+  const [otp] = useState(() =>
+    getSessionValue('otp_test')
+  );
+
   const [tempEmail] = useState(() => {
     const value = getSessionValue('bdg_temp_email');
 
@@ -409,6 +413,17 @@ export const P02VerifyOtp = () => {
             <strong className="text-slate-700 break-all">
               {tempEmail}
             </strong>
+
+            <br />
+            <div className="mt-3 rounded-lg border border-sky-200 bg-sky-50 p-3">
+              <p className="mb-1 text-xs font-medium text-sky-700">
+                OTP temporal · Solo para pruebas
+              </p>
+
+              <strong className="block break-all font-mono text-lg font-bold tracking-wider text-sky-800">
+                {otp}
+              </strong>
+            </div>
           </p>
         </div>
 

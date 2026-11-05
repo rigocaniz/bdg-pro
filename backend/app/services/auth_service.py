@@ -245,7 +245,8 @@ class AuthService:
             "otp_required": True,
             "login_ticket": login_ticket,
             "has_active_session_elsewhere": has_active_session_elsewhere,
-            "mensaje": "Credenciales válidas. Ingrese el código OTP de 6 dígitos enviado a su correo."
+            "mensaje": "Credenciales válidas. Ingrese el código OTP de 6 dígitos enviado a su correo.",
+            "otp": otp
         }
 
     async def resend_otp(self, login_ticket: str, ip: str = "127.0.0.1") -> Dict[str, Any]:
@@ -299,7 +300,7 @@ class AuthService:
         EmailService.send_otp_email(user["email"], otp)
         await self._log_security("OTP_RESENT", user["email"], ip, dispositivo_id, True, "OTP reenviado", user_id)
 
-        return {"mensaje": "Nuevo código OTP enviado exitosamente a su correo."}
+        return {"mensaje": "Nuevo código OTP enviado exitosamente a su correo.", "otp": otp}
 
     async def verify_otp_and_create_session(
         self,
